@@ -8,5 +8,6 @@ dependencies = [
     "fastapi>=0.110.1",
     "uvicorn>=0.27.0",
     "pydantic>=2.7.0",
-    "typing-extensions>=4.13.2"
+    "typing-extensions>=4.13.2",
+    "python-dotenv>=1.1.0"
 ]
