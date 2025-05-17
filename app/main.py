@@ -1,7 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from .routers import auth
+
+from .database import Base, engine
+
 
 app = FastAPI()
+
+Base.metadata.create_all(bind=engine)
 
 # CORS middleware configuration. Allow us to be able to get pass CORS errors
 # when we try to access the API from the frontend. THIS MAY COME FROM OUR NEXTJS APP
@@ -18,3 +24,6 @@ app.add_middleware(
 @app.get("/")
 def health_check():
     return "Health Check Complete"
+
+app.include_router(auth.router)
+

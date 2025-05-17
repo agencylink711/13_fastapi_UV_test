@@ -1,4 +1,4 @@
-from sqlalchemy import column, Integer, String, ForeignKey, Table
+from sqlalchemy import Column, Integer, String, ForeignKey, Table
 from sqlalchemy.orm import relationship
 from .database import Base
 
@@ -7,8 +7,8 @@ from .database import Base
 # allowing a workout to be part of multiple routines and vice versa
 workout_routine_association = Table(
     "workout_routine", Base.metadata,
-    column("workout_id", Integer, ForeignKey("workouts.id")),
-    column("routine_id", Integer, ForeignKey("routines.id")),
+    Column("workout_id", Integer, ForeignKey("workouts.id")),
+    Column("routine_id", Integer, ForeignKey("routines.id")),
 )
 
 
@@ -28,9 +28,9 @@ class User(Base):
     """
     __tablename__ = "users"
 
-    id = column(Integer, primary_key=True, index=True)
-    username = column(String, unique=True, index=True)
-    hash_password = column(String)
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
 
     # Relationship definitions
     workouts = relationship("Workout", back_populates="user")
@@ -57,12 +57,12 @@ class Workout(Base):
     """
     __tablename__ = "workouts"
 
-    id = column(Integer, primary_key=True, index=True)
-    name = column(String, index=True)
-    description = column(String, index=True)
-    duration = column(Integer)  # Duration in minutes
-    date = column(String)  # Date in YYYY-MM-DD format
-    user_id = column(Integer, ForeignKey("users.id"))
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+    description = Column(String, index=True)
+    duration = Column(Integer)  # Duration in minutes
+    date = Column(String)  # Date in YYYY-MM-DD format
+    user_id = Column(Integer, ForeignKey("users.id"))
 
     user = relationship("User", back_populates="workouts")
     routines = relationship("Routine", secondary=workout_routine_association, back_populates="workouts")
@@ -88,12 +88,12 @@ class Routine(Base):
     """
     __tablename__ = "routines"
 
-    id = column(Integer, primary_key=True, index=True)
-    name = column(String, index=True)
-    description = column(String, index=True)
-    duration = column(Integer)  # Duration in minutes
-    date = column(String)  # Date in YYYY-MM-DD format
-    user_id = column(Integer, ForeignKey("users.id"))
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+    description = Column(String, index=True)
+    duration = Column(Integer)  # Duration in minutes
+    date = Column(String)  # Date in YYYY-MM-DD format
+    user_id = Column(Integer, ForeignKey("users.id"))
 
     user = relationship("User", back_populates="routines")
     workouts = relationship("Workout", secondary=workout_routine_association, back_populates="routines")
