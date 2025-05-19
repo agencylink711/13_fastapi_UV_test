@@ -121,7 +121,9 @@ API_URL=http://localhost:3000
 - JWT token validation
 - User authentication utilities
 
-### 6. Security Best Practices
+### .6 Going Ahead to Create WorkOuts
+
+### . Security Best Practices
 
 1. Add `.env` to `.gitignore`:
 

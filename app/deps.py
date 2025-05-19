@@ -48,7 +48,7 @@ db_dependency = Annotated[Session, Depends(get_db)]
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # OAuth2 configuration for token-based authentication
-oauth2_bearer = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_bearer = OAuth2PasswordBearer(tokenUrl="auth/token")
 oauth2_bearer_dependency = Annotated[str, Depends(oauth2_bearer)]
 
 async def get_current_user(token: oauth2_bearer_dependency):
